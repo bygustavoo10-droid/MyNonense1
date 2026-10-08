@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyNonense - Red Social Nostálgica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=VT323&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tumblr: {
+                            bg: '#181f29',
+                            card: '#222c3b',
+                            accent: '#35465c',
+                            pink: '#f1a7b8',
+                            lavender: '#cbb4d5',
+                            softblue: '#a2c4c9',
+                            sunset: '#fbc7d4',
+                            grunge: '#2d2d2d'
+                        },
+                        myspace: {
+                            bg: '#000000',
+                            header: '#003366',
+                            card: '#ffffff',
+                            text: '#000000',
+                            accent: '#ff0066',
+                            link: '#003399'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Courier Prime', 'monospace'],
+                        pixel: ['VT323', 'monospace'],
+                        retro: ['Comic Neue', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body.theme-tumblr {
+            background: linear-gradient(135deg, #181f29 0%, #222a38 50%, #1a1e28 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .theme-tumblr .card-polaroid {
+            background-color: #fcfbf9;
+            color: #1a1a1a;
+            padding: 12px 12px 20px 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            transform: rotate(-0.5deg);
+            transition: all 0.3s ease;
+        }
+
+        .theme-tumblr .card-polaroid:hover {
+            transform: rotate(0deg) translateY(-4px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .theme-tumblr .tumblr-box {
+            background: rgba(34, 44, 59, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .theme-tumblr .sunset-gradient-text {
+            background: linear-gradient(45deg, #fbc7d4, #9796f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .theme-tumblr .soft-btn {
+            background: linear-gradient(135deg, #f1a7b8 0%, #cbb4d5 100%);
+            color: #1a1a1a;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        .theme-tumblr .soft-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Estilo Myspace 2000s Clásico */
+        body.theme-myspace {
+            background-color: #e5e5e5;
+            background-image: repeating-linear-gradient(0deg, #d8d8d8, #d8d8d8 1px, transparent 1px, transparent 20px);
+            color: #000;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .theme-myspace .tumblr-box {
+            background: #ffffff;
+            border: 2px solid #003366;
+            border-radius: 0px;
+            box-shadow: 4px 4px 0px #000;
+            color: #000;
+        }
+
+        .theme-myspace .card-polaroid {
+            background-color: #fff;
+            border: 1px solid #999;
+            color: #000;
+            padding: 8px;
+            border-radius: 0;
+            box-shadow: 2px 2px 0px #888;
+        }
+
+        .theme-myspace .sunset-gradient-text {
+            color: #ff0066;
+            background: none;
+            -webkit-text-fill-color: initial;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .theme-myspace .soft-btn {
+            background: #003366;
+            color: #fff;
+            border: 1px solid #000;
+            border-radius: 0;
+            font-family: 'Comic Neue', cursive;
+        }
+
+        .retro-audio-player {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="theme-tumblr transition-colors duration-300 min-h-screen pb-12">
+
+    <header class="sticky top-0 z-50 border-b border-white/10 bg-tumblr-bg/90 backdrop-blur-md transition-colors" id="appHeader">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Logo & Marca -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-tumblr-pink to-tumblr-lavender flex items-center justify-center text-tumblr-bg font-bold text-xl shadow-md">
+                    N
+                </div>
+                <div>
+                    <h1 class="font-mono text-xl font-bold tracking-wider sunset-gradient-text">MyNonense</h1>
+                    <p class="text-[10px] opacity-60 tracking-widest uppercase" id="lblSubHeader">Social network & moodboard</p>
+                </div>
+            </div>
+
+            <!-- Controles de Ajustes (Idioma & Tema) -->
+            <div class="flex items-center space-x-3">
+                <!-- Selector de Idioma -->
+                <button id="btnLangToggle" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/10 hover:bg-white/20 transition flex items-center gap-1.5">
+                    <i class="fa-solid font-mono text-xs">🌐</i>
+                    <span id="txtCurrentLang">ES</span>
+                </button>
+
+                <!-- Selector de Tema (Tumblr 2013 vs MySpace 2000s) -->
+                <button id="btnThemeToggle" class="px-3 py-1.5 rounded-full text-xs font-medium border border-tumblr-pink/40 text-tumblr-pink hover:bg-tumblr-pink/10 transition flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span id="txtThemeLabel">Estética 2013 Tumblr</span>
+                </button>
+
+                <!-- Usuario Perfil Badge -->
+                <div id="userBadge" class="hidden flex items-center gap-2 pl-2 border-l border-white/10">
+                    <img id="headerAvatar" src="" class="w-8 h-8 rounded-full object-cover border border-tumblr-pink">
+                    <span id="headerUsername" class="text-xs font-medium text-slate-300 hidden sm:inline"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Columna Izquierda: Perfil, Música Personalizada & Amigos -->
+        <aside class="md:col-span-4 space-y-6">
+            <!-- Tarjeta de Perfil -->
+            <div class="tumblr-box p-5 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-16 bg-gradient-to-r from-tumblr-pink/30 to-tumblr-lavender/30"></div>
+                
+                <div class="relative pt-6 text-center">
+                    <div class="relative inline-block group">
+                        <img id="profileAvatar" src="https://placehold.co/120x120/2d2d2d/ffffff?text=Avatar" class="w-24 h-24 rounded-full mx-auto object-cover border-4 border-tumblr-card shadow-lg">
+                        <label for="inputAvatarFile" class="absolute bottom-0 right-0 bg-tumblr-pink text-slate-900 p-2 rounded-full cursor-pointer hover:scale-110 transition shadow">
+                            <i class="fa-solid fa-camera text-xs"></i>
+                        </label>
+                        <input type="file" id="inputAvatarFile" accept="image/*" class="hidden">
+                    </div>
+
+                    <h2 id="profileName" class="text-lg font-bold mt-3">Cargando...</h2>
+                    <p id="profileBio" class="text-xs text-slate-400 mt-1 italic font-mono">"Soft grunge, cassettes y memorias retro."</p>
+
+                    <!-- Estado / Mood -->
+                    <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                        <span class="text-slate-400" id="lblMoodTitle">Estado actual:</span>
+                        <span id="profileMood" class="px-2 py-0.5 rounded-full bg-tumblr-pink/20 text-tumblr-pink font-semibold">🌌 Soñador</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tumblr-box p-4">
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-mono tracking-wider text-tumblr-pink flex items-center gap-2">
+                        <i class="fa-solid fa-compact-disc animate-spin text-sm"></i>
+                        <span id="lblMusicTitle">Mi Música de Perfil</span>
+                    </span>
+                    <button id="btnOpenMusicModal" class="text-[11px] text-tumblr-lavender hover:underline flex items-center gap-1">
+                        <i class="fa-solid fa-gear"></i> <span id="lblConfigMusic">Cambiar</span>
+                    </button>
+                </div>
+
+                <!-- Reproductor MP3 local -->
+                <div id="mp3PlayerContainer" class="retro-audio-player">
+                    <div class="flex items-center gap-3">
+                        <button id="btnAudioPlay" class="text-tumblr-pink hover:text-white transition">
+                            <i id="iconPlayPause" class="fa-solid fa-play text-sm"></i>
+                        </button>
+                        <div class="flex-1 overflow-hidden">
+                            <p class="text-[11px] font-medium truncate" id="trackName">Sin canción configurada</p>
+                            <div class="w-full bg-slate-700 h-1.5 rounded-full mt-1.5 overflow-hidden cursor-pointer" id="progressContainer">
+                                <div id="audioProgress" class="bg-tumblr-pink h-full w-0 transition-all duration-100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <audio id="profileAudioElement" class="hidden"></audio>
+                </div>
+
+                <!-- Reproductor Spotify Iframe -->
+                <div id="spotifyPlayerContainer" class="hidden mt-2">
+                    <iframe id="spotifyIframe" class="w-full rounded-xl" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <!-- Sistema Real de Amigos Globales -->
+            <div class="tumblr-box p-5">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-sm tracking-wide flex items-center gap-2">
+                        <i class="fa-solid fa-user-group text-tumblr-lavender"></i>
+                        <span id="lblFriendsTitle">Tus Amigos Globales</span>
+                    </h3>
+                    <span id="friendsCount" class="text-xs bg-white/10 px-2 py-0.5 rounded-full font-mono">0</span>
+                </div>
+
+                <!-- Agregar Amigo por ID / Nombre -->
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="inputFriendId" placeholder="ID o Usuario de amigo..." class="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-tumblr-pink">
+                    <button id="btnAddFriend" class="soft-btn px-3 py-1.5 rounded-lg text-xs whitespace-nowrap">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </button>
+                </div>
+
+                <!-- Lista de Amigos Conectados/Guardados -->
+                <div id="friendsList" class="space-y-3 max-h-56 overflow-y-auto pr-1">
+                    <p class="text-xs text-slate-500 text-center py-4" id="lblNoFriends">Aún no has agregado amigos. Comparte tu ID de abajo.</p>
+                </div>
+
+                <!-- Tu ID único para compartir -->
+                <div class="mt-4 pt-3 border-t border-white/10">
+                    <p class="text-[10px] text-slate-400 mb-1" id="lblYourID">Tu ID único de amigo:</p>
+                    <div class="flex items-center gap-2 bg-black/30 p-2 rounded border border-white/5">
+                        <code id="myUniqueId" class="text-xs font-mono text-tumblr-pink truncate flex-1">Cargando...</code>
+                        <button id="btnCopyId" class="text-xs text-slate-400 hover:text-white"><i class="fa-solid fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="md:col-span-8 space-y-6">
+            
+            <!-- Crear Publicación (Post Box Tumblr Style) -->
+            <div class="tumblr-box p-5">
+                <div class="flex items-center gap-3 mb-4">
+                    <img id="postAuthorAvatar" src="https://placehold.co/80x80/2d2d2d/ffffff?text=Tu" class="w-10 h-10 rounded-full object-cover border border-tumblr-pink">
+                    <input type="text" id="postTitleInput" placeholder="Título o pensamiento del momento..." class="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-tumblr-pink">
+                </div>
+
+                <textarea id="postContentInput" rows="3" placeholder="Escribe algo estético, fragmentos de canciones o notas nostálgicas..." class="w-full bg-black/20 border border-white/10 rounded-xl p-4 text-sm focus:outline-none focus:border-tumblr-pink resize-none"></textarea>
+
+                <!-- Vista Previa de Imagen Cargada -->
+                <div id="imagePreviewContainer" class="hidden relative mt-3 mb-2">
+                    <img id="imagePreview" src="" class="max-h-60 rounded-lg mx-auto object-cover border border-white/10">
+                    <button id="btnRemoveImage" class="absolute top-2 right-2 bg-black/70 text-white rounded-full p-1.5 hover:bg-red-500 transition">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Selector de GIFs embebido / Modal Trigger -->
+                <div id="gifContainer" class="hidden mt-3 mb-2 p-3 bg-black/30 rounded-lg">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-xs font-mono text-tumblr-lavender" id="lblGifSelect">Elige un GIF Retro 2014:</span>
+                        <button id="btnCloseGifs" class="text-xs text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 max-h-40 overflow-y-auto" id="gifGrid">
+                        <!-- GIFs predeterminados nostálgicos -->
+                    </div>
+                </div>
+
+                <!-- Botones de Acción para Crear Post -->
+                <div class="flex items-center justify-between mt-4 pt-3 border-t border-white/10">
+                    <div class="flex items-center gap-2">
+                        <!-- Subir foto desde Galería del dispositivo -->
+                        <label for="inputPostPhoto" class="cursor-pointer px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-tumblr-pink flex items-center gap-2 transition">
+                            <i class="fa-solid fa-image"></i>
+                            <span id="btnUploadPhotoLbl">Galería</span>
+                        </label>
+                        <input type="file" id="inputPostPhoto" accept="image/*" class="hidden">
+
+                        <!-- Selector de GIF -->
+                        <button id="btnToggleGif" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-tumblr-lavender flex items-center gap-2 transition">
+                            <i class="fa-solid fa-film"></i>
+                            <span>GIF</span>
+                        </button>
+                    </div>
+
+                    <button id="btnPublishPost" class="soft-btn px-5 py-2 rounded-xl text-xs font-bold shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span id="btnPostLbl">Publicar</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feed de Publicaciones -->
+            <div class="space-y-6" id="feedContainer">
+                <div class="text-center py-12 text-slate-500 font-mono text-xs" id="feedLoading">
+                    <i class="fa-solid fa-circle-notch animate-spin text-lg mb-2"></i>
+                    <p id="lblLoadingFeed">Sincronizando feed nostálgico...</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="musicModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="tumblr-box p-6 max-w-md w-full space-y-4 relative">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                <h3 class="font-bold text-sm text-tumblr-pink flex items-center gap-2">
+                    <i class="fa-solid fa-music"></i>
+                    <span id="lblMusicModalTitle">Configurar Música de Tu Perfil</span>
+                </h3>
+                <button id="btnCloseMusicModal" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Opción 1: Subir MP3 Local -->
+            <div class="space-y-2">
+                <label class="block text-xs font-semibold text-slate-300" id="lblOptionMp3">Opción 1: Subir Archivo MP3 desde tu Galería/Dispositivo</label>
+                <div class="flex items-center gap-2">
+                    <label for="inputMp3File" class="cursor-pointer bg-white/10 hover:bg-white/20 text-xs text-tumblr-lavender px-3 py-2 rounded-lg border border-white/10 flex-1 text-center font-mono">
+                        <i class="fa-solid fa-file-audio mr-1"></i> <span id="lblSelectMp3Btn">Seleccionar MP3...</span>
+                    </label>
+                    <input type="file" id="inputMp3File" accept="audio/mp3,audio/wav,audio/*" class="hidden">
+                </div>
+            </div>
+
+            <div class="text-center text-[10px] text-slate-500 uppercase font-mono tracking-widest my-1">— O —</div>
+
+            <!-- Opción 2: Spotify URL / Embed -->
+            <div class="space-y-2">
+                <label class="block text-xs font-semibold text-slate-300" id="lblOptionSpotify">Opción 2: Enlace o Embed de Spotify</label>
+                <input type="text" id="inputSpotifyUrl" placeholder="https://open.spotify.com/track/... o código embed" class="w-full bg-black/30 border border-white/10 rounded-lg p-2.5 text-xs text-slate-200 focus:outline-none focus:border-tumblr-pink font-mono">
+                <p class="text-[10px] text-slate-400" id="lblSpotifyHint">Pega el link de cualquier canción, álbum o playlist de Spotify.</p>
+            </div>
+
+            <div class="pt-3 border-t border-white/10 flex justify-end gap-2">
+                <button id="btnSaveMusic" class="soft-btn px-4 py-2 rounded-lg text-xs font-bold">
+                    <i class="fa-solid fa-floppy-disk mr-1"></i> <span id="lblSaveMusicBtn">Guardar Canción</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, onSnapshot, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'mynonense-nostalgic';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "demo",
+            authDomain: "demo.firebaseapp.com",
+            projectId: "demo",
+            storageBucket: "demo.appspot.com",
+            messagingSenderId: "00000",
+            appId: "1:0000:web:0000"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const state = {
+            lang: 'es',
+            theme: 'tumblr',
+            user: null,
+            userData: null,
+            selectedImageBase64: null,
+            selectedMp3Data: null,
+            selectedMp3Name: null
+        };
+
+        const i18n = {
+            es: {
+                subHeader: "Red social & moodboard",
+                themeTumblr: "Estética 2013 Tumblr",
+                themeMySpace: "Modo MySpace 2000s",
+                moodTitle: "Estado actual:",
+                musicTitle: "Mi Música de Perfil",
+                configMusic: "Cambiar",
+                friendsTitle: "Tus Amigos Globales",
+                noFriends: "Aún no has agregado amigos. Comparte tu ID de abajo.",
+                yourID: "Tu ID único de amigo:",
+                postPlaceholderTitle: "Título o pensamiento del momento...",
+                postPlaceholderContent: "Escribe algo estético, fragmentos de canciones o notas nostálgicas...",
+                gifSelect: "Elige un GIF Retro 2014:",
+                uploadPhoto: "Galería",
+                publish: "Publicar",
+                loadingFeed: "Sincronizando feed nostálgico...",
+                reblog: "Rebloguear",
+                like: "Me gusta",
+                musicModalTitle: "Configurar Música de Tu Perfil",
+                optionMp3: "Opción 1: Subir Archivo MP3 desde tu Galería/Dispositivo",
+                selectMp3Btn: "Seleccionar MP3...",
+                optionSpotify: "Opción 2: Enlace o Embed de Spotify",
+                spotifyHint: "Pega el link de cualquier canción, álbum o playlist de Spotify.",
+                saveMusicBtn: "Guardar Canción",
+                friendAdded: "¡Amigo agregado con éxito!",
+                friendNotFound: "No se encontró ningún usuario con ese ID.",
+                idCopied: "¡ID copiado al portapapeles!"
+            },
+            en: {
+                subHeader: "Social network & moodboard",
+                themeTumblr: "2013 Tumblr Aesthetic",
+                themeMySpace: "2000s MySpace Mode",
+                moodTitle: "Current status:",
+                musicTitle: "Profile Music",
+                configMusic: "Change",
+                friendsTitle: "Your Global Friends",
+                noFriends: "No friends added yet. Share your ID below.",
+                yourID: "Your unique friend ID:",
+                postPlaceholderTitle: "Title or thoughts right now...",
+                postPlaceholderContent: "Write something aesthetic, song lyrics, or nostalgic notes...",
+                gifSelect: "Choose a 2014 Retro GIF:",
+                uploadPhoto: "Gallery",
+                publish: "Post",
+                loadingFeed: "Syncing nostalgic feed...",
+                reblog: "Reblog",
+                like: "Like",
+                musicModalTitle: "Configure Profile Music",
+                optionMp3: "Option 1: Upload MP3 File from Device",
+                selectMp3Btn: "Select MP3...",
+                optionSpotify: "Option 2: Spotify Link or Embed Code",
+                spotifyHint: "Paste any Spotify track, album, or playlist URL.",
+                saveMusicBtn: "Save Track",
+                friendAdded: "Friend added successfully!",
+                friendNotFound: "No user found with that ID.",
+                idCopied: "ID copied to clipboard!"
+            }
+        };
+
+        const RETRO_GIFS = [
+            "https://media.giphy.com/media/l41K3o5TzT8I31f0m/giphy.gif",
+            "https://media.giphy.com/media/3o6Zt80TSoq2uJk57W/giphy.gif",
+            "https://media.giphy.com/media/d2ZeM6gEP45y0/giphy.gif",
+            "https://media.giphy.com/media/xT1R14bK3J9V6XvAju/giphy.gif",
+            "https://media.giphy.com/media/3o7TKSjRrfIPjeiVyM/giphy.gif",
+            "https://media.giphy.com/media/l2JhnvF6Sp4fLgQM8/giphy.gif"
+        ];
+
+        async function initAuth() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (err) {
+                console.error("Auth error:", err);
+            }
+        }
+
+        onAuthStateChanged(auth, async (currentUser) => {
+            if (currentUser) {
+                state.user = currentUser;
+                document.getElementById('myUniqueId').innerText = currentUser.uid;
+
+                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', currentUser.uid);
+                const userSnap = await getDoc(userRef);
+
+                if (!userSnap.exists()) {
+                    const randomNum = Math.floor(1000 + Math.random() * 9000);
+                    const defaultProfile = {
+                        username: `SoftDreamer_${randomNum}`,
+                        avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${currentUser.uid}`,
+                        bio: "Soft grunge, cassettes y memorias retro.",
+                        mood: "🌌 Soñador",
+                        musicType: "none",
+                        musicData: "",
+                        musicTitle: "",
+                        friends: []
+                    };
+                    await setDoc(userRef, defaultProfile);
+                    state.userData = defaultProfile;
+                } else {
+                    state.userData = userSnap.data();
+                }
+
+                updateProfileUI();
+                listenToFeed();
+                listenToFriends();
+            }
+        });
+
+        function updateProfileUI() {
+            if (!state.userData) return;
+            document.getElementById('profileName').innerText = state.userData.username;
+            document.getElementById('headerUsername').innerText = state.userData.username;
+            document.getElementById('profileBio').innerText = `"${state.userData.bio}"`;
+            document.getElementById('profileMood').innerText = state.userData.mood;
+
+            if (state.userData.avatar) {
+                document.getElementById('profileAvatar').src = state.userData.avatar;
+                document.getElementById('headerAvatar').src = state.userData.avatar;
+                document.getElementById('postAuthorAvatar').src = state.userData.avatar;
+                document.getElementById('userBadge').classList.remove('hidden');
+            }
+
+            // Aplicar Configuración de Música (MP3 o Spotify)
+            const mp3Container = document.getElementById('mp3PlayerContainer');
+            const spotifyContainer = document.getElementById('spotifyPlayerContainer');
+            const audioElement = document.getElementById('profileAudioElement');
+            const trackName = document.getElementById('trackName');
+
+            if (state.userData.musicType === 'spotify' && state.userData.musicData) {
+                mp3Container.classList.add('hidden');
+                spotifyContainer.classList.remove('hidden');
+                
+                // Formatear Spotify Embed URL
+                let embedUrl = state.userData.musicData;
+                if (embedUrl.includes('open.spotify.com/track/') || embedUrl.includes('open.spotify.com/playlist/')) {
+                    embedUrl = embedUrl.replace('open.spotify.com/', 'open.spotify.com/embed/');
+                }
+                document.getElementById('spotifyIframe').src = embedUrl;
+            } else if (state.userData.musicType === 'mp3' && state.userData.musicData) {
+                spotifyContainer.classList.add('hidden');
+                mp3Container.classList.remove('hidden');
+                audioElement.src = state.userData.musicData;
+                trackName.innerText = state.userData.musicTitle || "Canción MP3";
+            } else {
+                spotifyContainer.classList.add('hidden');
+                mp3Container.classList.remove('hidden');
+                trackName.innerText = "Sin canción configurada";
+            }
+        }
+
+        const audioElement = document.getElementById('profileAudioElement');
+        const btnPlayPause = document.getElementById('btnAudioPlay');
+        const iconPlayPause = document.getElementById('iconPlayPause');
+        const progressBar = document.getElementById('audioProgress');
+
+        btnPlayPause.addEventListener('click', () => {
+            if (!audioElement.src) return;
+            if (audioElement.paused) {
+                audioElement.play();
+                iconPlayPause.className = "fa-solid fa-pause text-sm";
+            } else {
+                audioElement.pause();
+                iconPlayPause.className = "fa-solid fa-play text-sm";
+            }
+        });
+
+        audioElement.addEventListener('timeupdate', () => {
+            if (audioElement.duration) {
+                const pct = (audioElement.currentTime / audioElement.duration) * 100;
+                progressBar.style.width = `${pct}%`;
+            }
+        });
+
+        document.getElementById('btnOpenMusicModal').addEventListener('click', () => {
+            document.getElementById('musicModal').classList.remove('hidden');
+        });
+        document.getElementById('btnCloseMusicModal').addEventListener('click', () => {
+            document.getElementById('musicModal').classList.add('hidden');
+        });
+
+        document.getElementById('inputMp3File').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    state.selectedMp3Data = evt.target.result;
+                    state.selectedMp3Name = file.name;
+                    document.getElementById('lblSelectMp3Btn').innerText = file.name;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('btnSaveMusic').addEventListener('click', async () => {
+            if (!state.user) return;
+            const spotifyUrl = document.getElementById('inputSpotifyUrl').value.trim();
+
+            let updatePayload = {};
+
+            if (spotifyUrl) {
+                updatePayload = {
+                    musicType: 'spotify',
+                    musicData: spotifyUrl,
+                    musicTitle: 'Spotify Track'
+                };
+            } else if (state.selectedMp3Data) {
+                updatePayload = {
+                    musicType: 'mp3',
+                    musicData: state.selectedMp3Data,
+                    musicTitle: state.selectedMp3Name || 'Mi Canción MP3'
+                };
+            }
+
+            if (Object.keys(updatePayload).length > 0) {
+                const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', state.user.uid);
+                await updateDoc(userRef, updatePayload);
+                state.userData = { ...state.userData, ...updatePayload };
+                updateProfileUI();
+                document.getElementById('musicModal').classList.add('hidden');
+            }
+        });
+
+        function listenToFeed() {
+            const postsColl = collection(db, 'artifacts', appId, 'public', 'data', 'posts');
+            onSnapshot(postsColl, (snapshot) => {
+                const feedContainer = document.getElementById('feedContainer');
+                feedContainer.innerHTML = '';
+
+                let posts = [];
+                snapshot.forEach(docSnap => {
+                    posts.push({ id: docSnap.id, ...docSnap.data() });
+                });
+
+                posts.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+                if (posts.length === 0) {
+                    feedContainer.innerHTML = `
+                        <div class="tumblr-box p-8 text-center text-slate-400">
+                            <p class="text-sm font-mono">No hay publicaciones aún. ¡Sé el primero en compartir algo estético!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                posts.forEach(post => {
+                    feedContainer.appendChild(renderPostCard(post));
+                });
+            });
+        }
+
+        function renderPostCard(post) {
+            const card = document.createElement('article');
+            card.className = "tumblr-box p-5 space-y-4 transition-all duration-300";
+            const txt = i18n[state.lang];
+
+            let mediaHTML = '';
+            if (post.image) {
+                mediaHTML = `
+                    <div class="card-polaroid my-3">
+                        <img src="${post.image}" class="w-full max-h-96 object-cover rounded-sm">
+                        ${post.title ? `<p class="mt-2 text-center text-xs font-mono text-slate-700 italic">${post.title}</p>` : ''}
+                    </div>
+                `;
+            }
+
+            card.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="${post.authorAvatar || 'https://placehold.co/80x80'}" class="w-9 h-9 rounded-full object-cover border border-tumblr-pink">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-200">${post.authorName || 'Anónimo'}</h4>
+                            <span class="text-[10px] text-slate-400 font-mono">${new Date(post.createdAt || Date.now()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                    </div>
+                    <span class="text-xs text-tumblr-pink font-mono opacity-60">#2014aesthetic</span>
+                </div>
+
+                ${!post.image && post.title ? `<h3 class="text-base font-bold text-tumblr-pink">${post.title}</h3>` : ''}
+                ${post.content ? `<p class="text-sm leading-relaxed text-slate-300">${post.content}</p>` : ''}
+
+                ${mediaHTML}
+
+                <div class="flex items-center justify-between pt-3 border-t border-white/10 text-xs text-slate-400">
+                    <div class="flex items-center gap-4">
+                        <button onclick="window.likePost('${post.id}', ${post.likes || 0})" class="hover:text-tumblr-pink transition flex items-center gap-1.5">
+                            <i class="fa-regular fa-heart"></i>
+                            <span>${post.likes || 0} ${txt.like}</span>
+                        </button>
+                        <button class="hover:text-tumblr-lavender transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                            <span>${txt.reblog}</span>
+                        </button>
+                    </div>
+                    <span class="text-[10px] font-mono opacity-40">MyNonense Post</span>
+                </div>
+            `;
+            return card;
+        }
+
+        window.likePost = async (postId, currentLikes) => {
+            if (!state.user) return;
+            const postRef = doc(db, 'artifacts', appId, 'public', 'data', 'posts', postId);
+            await updateDoc(postRef, { likes: currentLikes + 1 });
+        };
+
+        function listenToFriends() {
+            if (!state.user) return;
+            const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', state.user.uid);
+            onSnapshot(userRef, async (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    const friendIds = data.friends || [];
+                    document.getElementById('friendsCount').innerText = friendIds.length;
+
+                    const listEl = document.getElementById('friendsList');
+                    if (friendIds.length === 0) {
+                        listEl.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">${i18n[state.lang].noFriends}</p>`;
+                        return;
+                    }
+
+                    listEl.innerHTML = '';
+                    for (let fId of friendIds) {
+                        const fSnap = await getDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', fId));
+                        if (fSnap.exists()) {
+                            const fData = fSnap.data();
+                            const item = document.createElement('div');
+                            item.className = "flex items-center gap-2.5 p-2 rounded-lg bg-black/20 border border-white/5";
+                            item.innerHTML = `
+                                <img src="${fData.avatar}" class="w-7 h-7 rounded-full object-cover">
+                                <div class="flex-1 overflow-hidden">
+                                    <p class="text-xs font-medium truncate">${fData.username}</p>
+                                    <p class="text-[10px] text-tumblr-pink truncate">${fData.mood || ''}</p>
+                                </div>
+                            `;
+                            listEl.appendChild(item);
+                        }
+                    }
+                }
+            });
+        }
+
+        document.getElementById('btnAddFriend').addEventListener('click', async () => {
+            const friendIdInput = document.getElementById('inputFriendId');
+            const targetId = friendIdInput.value.trim();
+            const txt = i18n[state.lang];
+
+            if (!targetId || targetId === state.user.uid) return;
+
+            const targetRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', targetId);
+            const targetSnap = await getDoc(targetRef);
+
+            if (targetSnap.exists()) {
+                const myRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', state.user.uid);
+                await updateDoc(myRef, { friends: arrayUnion(targetId) });
+                friendIdInput.value = '';
+                alert(txt.friendAdded);
+            } else {
+                alert(txt.friendNotFound);
+            }
+        });
+
+        document.getElementById('inputPostPhoto').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    state.selectedImageBase64 = evt.target.result;
+                    document.getElementById('imagePreview').src = evt.target.result;
+                    document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('inputAvatarFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file && state.user) {
+                const reader = new FileReader();
+                reader.onload = async function(evt) {
+                    const newAvatar = evt.target.result;
+                    const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', state.user.uid);
+                    await updateDoc(userRef, { avatar: newAvatar });
+                    state.userData.avatar = newAvatar;
+                    updateProfileUI();
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('btnRemoveImage').addEventListener('click', () => {
+            state.selectedImageBase64 = null;
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+        });
+
+        const gifGrid = document.getElementById('gifGrid');
+        RETRO_GIFS.forEach(url => {
+            const img = document.createElement('img');
+            img.src = url;
+            img.className = "w-full h-16 object-cover rounded cursor-pointer hover:opacity-80 transition";
+            img.onclick = () => {
+                state.selectedImageBase64 = url;
+                document.getElementById('imagePreview').src = url;
+                document.getElementById('imagePreviewContainer').classList.remove('hidden');
+                document.getElementById('gifContainer').classList.add('hidden');
+            };
+            gifGrid.appendChild(img);
+        });
+
+        document.getElementById('btnToggleGif').addEventListener('click', () => {
+            document.getElementById('gifContainer').classList.toggle('hidden');
+        });
+        document.getElementById('btnCloseGifs').addEventListener('click', () => {
+            document.getElementById('gifContainer').classList.add('hidden');
+        });
+
+        document.getElementById('btnPublishPost').addEventListener('click', async () => {
+            if (!state.user) return;
+            const title = document.getElementById('postTitleInput').value.trim();
+            const content = document.getElementById('postContentInput').value.trim();
+
+            if (!title && !content && !state.selectedImageBase64) return;
+
+            const postsColl = collection(db, 'artifacts', appId, 'public', 'data', 'posts');
+            await addDoc(postsColl, {
+                title: title,
+                content: content,
+                image: state.selectedImageBase64 || null,
+                authorId: state.user.uid,
+                authorName: state.userData?.username || 'Anónimo',
+                authorAvatar: state.userData?.avatar || '',
+                likes: 0,
+                createdAt: Date.now()
+            });
+
+            document.getElementById('postTitleInput').value = '';
+            document.getElementById('postContentInput').value = '';
+            state.selectedImageBase64 = null;
+            document.getElementById('imagePreviewContainer').classList.add('hidden');
+        });
+
+        document.getElementById('btnCopyId').addEventListener('click', () => {
+            const idText = document.getElementById('myUniqueId').innerText;
+            const tempInput = document.createElement('input');
+            tempInput.value = idText;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert(i18n[state.lang].idCopied);
+        });
+
+        document.getElementById('btnLangToggle').addEventListener('click', () => {
+            state.lang = state.lang === 'es' ? 'en' : 'es';
+            document.getElementById('txtCurrentLang').innerText = state.lang.toUpperCase();
+            applyLanguage();
+        });
+
+        function applyLanguage() {
+            const txt = i18n[state.lang];
+            document.getElementById('lblSubHeader').innerText = txt.subHeader;
+            document.getElementById('txtThemeLabel').innerText = state.theme === 'tumblr' ? txt.themeTumblr : txt.themeMySpace;
+            document.getElementById('lblMoodTitle').innerText = txt.moodTitle;
+            document.getElementById('lblMusicTitle').innerText = txt.musicTitle;
+            document.getElementById('lblConfigMusic').innerText = txt.configMusic;
+            document.getElementById('lblFriendsTitle').innerText = txt.friendsTitle;
+            document.getElementById('lblYourID').innerText = txt.yourID;
+            document.getElementById('postTitleInput').placeholder = txt.postPlaceholderTitle;
+            document.getElementById('postContentInput').placeholder = txt.postPlaceholderContent;
+            document.getElementById('lblGifSelect').innerText = txt.gifSelect;
+            document.getElementById('btnUploadPhotoLbl').innerText = txt.uploadPhoto;
+            document.getElementById('btnPostLbl').innerText = txt.publish;
+            document.getElementById('lblLoadingFeed').innerText = txt.loadingFeed;
+            document.getElementById('lblMusicModalTitle').innerText = txt.musicModalTitle;
+            document.getElementById('lblOptionMp3').innerText = txt.optionMp3;
+            document.getElementById('lblSelectMp3Btn').innerText = txt.selectMp3Btn;
+            document.getElementById('lblOptionSpotify').innerText = txt.optionSpotify;
+            document.getElementById('lblSpotifyHint').innerText = txt.spotifyHint;
+            document.getElementById('lblSaveMusicBtn').innerText = txt.saveMusicBtn;
+        }
+
+        document.getElementById('btnThemeToggle').addEventListener('click', () => {
+            state.theme = state.theme === 'tumblr' ? 'myspace' : 'tumblr';
+            if (state.theme === 'myspace') {
+                document.body.className = 'theme-myspace transition-colors duration-300 min-h-screen pb-12';
+            } else {
+                document.body.className = 'theme-tumblr transition-colors duration-300 min-h-screen pb-12';
+            }
+            applyLanguage();
+        });
+
+        initAuth();
+    </script>
+</body>
+</html>
